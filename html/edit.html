@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+<div class="container">
+    <h2>Edit Phone Number</h2>
+    <form action="/update" method="post">
+        <input type="hidden" name="id" value="{{.PhoneNumber.ID}}">
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" name="phone_number" value="{{.PhoneNumber.PhoneNumbers}}" required>
+        <label for="provider">Provider:</label>
+        <input type="text" name="provider" value="{{.PhoneNumber.Provider}}" required>
+        <button type="submit">Update</button>
+    </form>
+</div>
+
+</body>
+</html>

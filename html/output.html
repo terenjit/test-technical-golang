@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            border: 2px solid #27ae60;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            color: #27ae60;
+        }
+
+        .output-columns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .column {
+            flex: 1;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .column h3 {
+            text-align: center;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+    
+<div class="container">
+    <h2>Output</h2>
+    <h2>Even and Odd Phone Numbers</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Odd Numbers</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <th>Even Numbers</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range $i, $oddNumber := .OddPhoneNumbers}}
+            <tr>
+                <td>{{$oddNumber.PhoneNumbers}} ({{$oddNumber.Provider}})</td>
+                <td>
+                    <form action="/edit" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="{{$oddNumber.ID}}">
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/delete" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="{{$oddNumber.ID}}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                {{if lt $i (len $.EvenPhoneNumbers)}}
+                    <td>{{index $.EvenPhoneNumbers $i}}</td>
+                    <td>
+                        <form action="/edit" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="{{index $.EvenPhoneNumbers $i}}.ID">
+                            <button type="submit">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/delete" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="{{index $.EvenPhoneNumbers $i}}.ID">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                {{else}}
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                {{end}}
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
